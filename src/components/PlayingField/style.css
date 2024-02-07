@@ -1,0 +1,11 @@
+.bodyPlayingField {
+  background-color: #fc8c0c;
+  height: 100%;
+  width: 70%;
+  padding: 20px;
+  margin-left: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
