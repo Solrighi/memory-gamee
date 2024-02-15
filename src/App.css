@@ -2,6 +2,12 @@
   text-align: center;
   height: 100vh;
   width: 100vw;
+  background-color: #1e1726;
+  color: white;
+  font-family: "Source Serif 4", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
 
 h1 {
@@ -10,8 +16,8 @@ h1 {
 }
 
 .components {
-  height: 80vh;
+  height: 85vh;
   width: 100vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }

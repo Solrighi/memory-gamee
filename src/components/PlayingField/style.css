@@ -1,11 +1,26 @@
 .bodyPlayingField {
-  background-color: #fc8c0c;
-  height: 100%;
-  width: 70%;
-  padding: 20px;
-  margin-left: 20px;
+  /* background-color: #fc8c0c; */
+  height: 90%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+}
+
+.bodyCard {
+  border-radius: 5px;
+  border-color: black;
+  border-style: solid;
+  border-width: thin;
+  margin: 15px;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+
+.components {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

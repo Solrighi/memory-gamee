@@ -2,16 +2,15 @@ import React from "react";
 import "./style.css";
 
 interface props {
-  ponts: number;
+  points: number;
 }
 
-function Pontuation({ ponts }: props) {
+function Punctuation({ points }: props) {
   return (
-    <div className="bodyPontuation">
-      <h1>Pontuação</h1>
-      <div>{ponts}</div>
+    <div className="bodyPunctuation">
+      <div>Turns: {points}</div>
     </div>
   );
 }
 
-export default Pontuation;
+export default Punctuation;
