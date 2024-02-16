@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
-import "./style.css";
-import { carta } from "../Images";
+import ReactCardFlip from "react-card-flip";
+import { universePokemon } from "../Images";
+import { CardProps } from "../PlayingField";
+import "./index.css";
 
-interface props {
-  imageRecepct: string;
-  onClick: (image: string) => void;
+interface Props {
+  onClick: () => void;
+  card: CardProps;
 }
 
-function Card({ imageRecepct, onClick }: props) {
-  const [imageCorrect, setImageCorrect] = useState<string>(carta);
-
-  const handleClick = () => {
-    onClick(imageRecepct);
-    setImageCorrect(imageRecepct);
-  };
-
+function Card(props: Props) {
   return (
-    <div className="bodyCard" onClick={handleClick}>
-      <img src={imageCorrect} alt="Descrição da Imagem" width={150} />
+    <div onClick={props.onClick}>
+      <ReactCardFlip
+        isFlipped={props.card.isFlipped}
+        flipDirection="horizontal"
+        flipSpeedFrontToBack={0.7}
+        flipSpeedBackToFront={0.7}
+      >
+        <img src={universePokemon} alt="front" width={150} />
+        <img src={props.card.img} alt="back" width={150} />
+      </ReactCardFlip>
     </div>
   );
 }

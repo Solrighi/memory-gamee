@@ -4,4 +4,7 @@
   border-style: solid;
   border-width: thin;
   margin: 15px;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
 }

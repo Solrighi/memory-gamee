@@ -1,9 +1,5 @@
-.bodyPontuation {
-  background-color: chocolate;
-  width: 20%;
-  height: 100%;
-  padding: 20px;
-  margin-right: 20px;
-  display: flex;
-  flex-direction: column;
+.bodyPunctuation {
+  /* background-color: chocolate; */
+  width: 100%;
+  font-size: 25px;
 }
