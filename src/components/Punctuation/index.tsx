@@ -8,7 +8,7 @@ interface props {
 function Punctuation({ points }: props) {
   return (
     <div className="bodyPunctuation">
-      <div>Turns: {points}</div>
+      <div>Points: {points}</div>
     </div>
   );
 }

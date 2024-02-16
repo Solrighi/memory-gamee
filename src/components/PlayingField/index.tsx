@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./style.css";
-import { universePokemon } from "../Images";
-import ReactCardFlip from "react-card-flip";
 import Punctuation from "../Punctuation";
 import { Button } from "@mantine/core";
+import Card from "../Card";
 
-interface Card {
+export interface CardProps {
   id: number;
   img: string;
   isFlipped: boolean;
@@ -22,12 +21,12 @@ interface PokemonType {
 
 function PlayingField() {
   const [isWaitingTimeout, setIsWaitingTimeout] = useState<boolean>(false);
-  const [lastCard, setLastCard] = useState<Card | null>(null);
+  const [lastCard, setLastCard] = useState<CardProps | null>(null);
   const [pointsState, setPointsState] = useState<number>(0);
-  const [cardList, setCardList] = useState<Card[]>([]);
-  const [pokemon, setPokemon] = useState<PokemonType[]>([]);
+  const [cardList, setCardList] = useState<CardProps[]>([]);
 
-  function handleClick(clickedCard: Card) {
+  function handleClick(clickedCard: CardProps) {
+    console.log("entrou aqui");
     if (
       cardList.find((card) => card.id === clickedCard.id)?.pairs ||
       isWaitingTimeout
@@ -78,7 +77,7 @@ function PlayingField() {
     setCardList(newCardList);
   }
 
-  function shuffleArray(array: Card[]) {
+  function shuffleArray(array: CardProps[]) {
     let currentIndex = array.length; //12
     let randomIndex;
 
@@ -95,7 +94,7 @@ function PlayingField() {
     return array;
   }
 
-  function transformPokemonToCards(results: PokemonType[]): Card[] {
+  function transformPokemonToCards(results: PokemonType[]): CardProps[] {
     return results.map((pokemon) => ({
       id: pokemon.id,
       img: pokemon.sprites.front_default,
@@ -104,7 +103,7 @@ function PlayingField() {
     }));
   }
 
-  async function fetchPokemons(pokemonNames: string[]) {
+  const fetchPokemons = useCallback(async (pokemonNames: string[]) => {
     try {
       const requests = pokemonNames.map((name) =>
         fetch(`https://pokeapi.co/api/v2/pokemon/${name}`).then((response) =>
@@ -113,19 +112,18 @@ function PlayingField() {
       );
 
       const results = await Promise.all(requests);
-      setPokemon(results);
-      let result = transformPokemonToCards(results);
+      const pokemonCards = transformPokemonToCards(results);
 
-      const duplicatedItems = result.flatMap((item) => [
+      const duplicatedItems = pokemonCards.flatMap((item) => [
         item,
-        { ...item, id: item.id + result.length },
+        { ...item, id: item.id + pokemonCards.length },
       ]);
 
       setCardList(shuffleArray(duplicatedItems));
     } catch (error) {
       console.error("Erro ao buscar dados dos Pokémon:", error);
     }
-  }
+  }, []);
 
   useEffect(() => {
     const pokemonNames = [
@@ -144,7 +142,7 @@ function PlayingField() {
     ];
 
     fetchPokemons(pokemonNames);
-  }, []);
+  }, [fetchPokemons]);
 
   return (
     <div className="components">
@@ -153,18 +151,7 @@ function PlayingField() {
       </Button>
       <div className="bodyPlayingField">
         {cardList.map((card, index) => (
-          <div className="bodyCard" onClick={() => handleClick(card)}>
-            <ReactCardFlip
-              key={index}
-              isFlipped={card.isFlipped}
-              flipDirection="horizontal"
-              flipSpeedFrontToBack={0.7}
-              flipSpeedBackToFront={0.7}
-            >
-              <img src={universePokemon} alt="front" width={150} />
-              <img src={card.img} alt="back" width={150} />
-            </ReactCardFlip>
-          </div>
+          <Card onClick={() => handleClick(card)} card={card} key={index} />
         ))}
       </div>
       <Punctuation points={pointsState} />
