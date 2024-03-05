@@ -1,25 +1,21 @@
 import React from "react";
-import "./App.css";
 import PlayingField from "./components/PlayingField";
-import { MantineProvider, createTheme } from "@mantine/core";
+import { MantineProvider, Stack, Title, createTheme } from "@mantine/core";
 import "@mantine/core/styles.css";
 
 const theme = createTheme({
-  fontFamily: "Open Sans, sans-serif",
-  primaryColor: "cyan",
+  fontFamily: "Source Serif 4",
 });
 
 function App() {
   return (
     <MantineProvider theme={theme}>
-      <div className="App">
-        <header>
-          <h1>Memory Game</h1>
-        </header>
-        <div className="components">
-          <PlayingField />
-        </div>
-      </div>
+      <Stack bg={"#1a1522"} mih={"100vh"} align="center">
+        <Title c={"white"} p={0} fw={"400"}>
+          Memory Game
+        </Title>
+        <PlayingField />
+      </Stack>
     </MantineProvider>
   );
 }
