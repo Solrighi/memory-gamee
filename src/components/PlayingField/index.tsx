@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import "./style.css";
 import Punctuation from "../Punctuation";
-import { Button } from "@mantine/core";
+import { Button, SimpleGrid, Stack } from "@mantine/core";
 import Card from "../Card";
 
 export interface CardProps {
@@ -145,17 +144,21 @@ function PlayingField() {
   }, [fetchPokemons]);
 
   return (
-    <div className="components">
-      <Button variant="outline" onClick={() => window.location.reload()}>
+    <Stack align="center">
+      <Button
+        variant="outline"
+        onClick={() => window.location.reload()}
+        w={"fit-content"}
+      >
         New Game
       </Button>
-      <div className="bodyPlayingField">
+      <SimpleGrid cols={{ xs: 2, sm: 4, md: 6, xl: 8 }}>
         {cardList.map((card, index) => (
           <Card onClick={() => handleClick(card)} card={card} key={index} />
         ))}
-      </div>
+      </SimpleGrid>
       <Punctuation points={pointsState} />
-    </div>
+    </Stack>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css";
+import { Title } from "@mantine/core";
 
 interface props {
   points: number;
@@ -7,9 +7,9 @@ interface props {
 
 function Punctuation({ points }: props) {
   return (
-    <div className="bodyPunctuation">
-      <div>Points: {points}</div>
-    </div>
+    <Title c={"white"} p={0} fw={"400"}>
+      Points: {points}
+    </Title>
   );
 }
 

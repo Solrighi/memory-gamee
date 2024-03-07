@@ -1,7 +1,6 @@
 import ReactCardFlip from "react-card-flip";
 import { universePokemon } from "../Images";
 import { CardProps } from "../PlayingField";
-import "./index.css";
 
 interface Props {
   onClick: () => void;
