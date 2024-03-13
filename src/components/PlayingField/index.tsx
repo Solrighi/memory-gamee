@@ -152,7 +152,7 @@ function PlayingField() {
       >
         New Game
       </Button>
-      <SimpleGrid cols={{ xs: 2, sm: 4, md: 6, xl: 8 }}>
+      <SimpleGrid cols={{ base: 2, xs: 2, sm: 4, md: 6, xl: 8 }}>
         {cardList.map((card, index) => (
           <Card onClick={() => handleClick(card)} card={card} key={index} />
         ))}
